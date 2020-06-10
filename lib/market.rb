@@ -17,4 +17,15 @@ class Market
   def vendors_that_sell(item)
     vendors.select { |vendor| vendor.inventory.include?(item) }
   end
+
+  def sorted_item_list
+    names = []
+    vendors.each do |vendor|
+      vendor.inventory.each do |item, _|
+        names << item.name
+      end
+    end
+
+    names.sort.uniq
+  end
 end

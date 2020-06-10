@@ -28,4 +28,21 @@ class Market
 
     names.sort.uniq
   end
+
+  def total_inventory
+    market_inventory = Hash.new(0)
+    vendors.each do |vendor|
+      vendor.inventory.each do |item, amount|
+        if market_inventory.include?(item) == false
+          market_inventory[item] = {quantity: 0, vendors: []}
+          market_inventory[item][:quantity] += amount
+          market_inventory[item][:vendors] << vendor
+        else
+          market_inventory[item][:quantity] += amount
+          market_inventory[item][:vendors] << vendor unless market_inventory[item][:vendors].include?(vendor)
+        end
+      end
+    end
+    market_inventory
+  end
 end

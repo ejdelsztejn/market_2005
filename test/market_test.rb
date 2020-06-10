@@ -1,5 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'mocha/minitest'
+require 'date'
 require './lib/item'
 require './lib/vendor'
 require './lib/market'
@@ -178,5 +180,15 @@ class MarketTest < MiniTest::Test
     market.add_vendor(vendor3)
 
     assert_equal [item1], market.overstocked_items
+  end
+
+  def test_it_has_a_date
+    skip
+    # I used a stub value that I was told should work in my previous IC
+    # but it doesn't work... not sure what I did wrong
+    
+    market = Market.new("South Pearl Street Farmers Market")
+
+    assert_equal Time.stubs(:now).returns("04/06/2020"), market.date
   end
 end

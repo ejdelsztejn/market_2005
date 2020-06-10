@@ -13,4 +13,8 @@ class Vendor
   def check_stock(item)
     inventory[item]
   end
+
+  def potential_revenue
+    inventory.keys.map { |item| item.price * inventory[item] }.sum
+  end
 end
